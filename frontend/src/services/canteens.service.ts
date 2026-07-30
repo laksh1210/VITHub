@@ -11,7 +11,10 @@ class CanteensService extends BaseService {
     super("");
   }
 
-  public async getAll(): Promise<CanteenResponse[]> {
+  public async getAll(buildingId?: string): Promise<CanteenResponse[]> {
+    if (buildingId && buildingId !== "NONE") {
+      return Promise.resolve(MOCK_CANTEENS.filter(c => c.buildingId === buildingId));
+    }
     return Promise.resolve(MOCK_CANTEENS);
   }
 
