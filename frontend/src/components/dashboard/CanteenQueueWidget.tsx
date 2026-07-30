@@ -5,7 +5,7 @@ import { useCanteenAnalytics, useCanteenQueues } from '@/hooks/api/use-dashboard
 import WidgetSkeleton from './WidgetSkeleton';
 import WidgetError from './WidgetError';
 import WidgetEmpty from './WidgetEmpty';
-import { Utensils, Clock, AlertCircle } from 'lucide-react';
+import { Coffee, Clock, Users } from 'lucide-react';
 
 export default function CanteenQueueWidget() {
   const {

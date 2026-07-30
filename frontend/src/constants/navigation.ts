@@ -37,10 +37,10 @@ export const SIDEBAR_NAV: NavItem[] = [
     href: "/library",
   },
   {
-    id: "shuttle",
-    label: "Shuttle",
+    id: "shuttles",
+    label: "Shuttles",
     icon: Bus,
-    href: "/shuttle",
+    href: "/shuttles",
   },
   {
     id: "maintenance",
@@ -53,6 +53,18 @@ export const SIDEBAR_NAV: NavItem[] = [
     label: "Events",
     icon: Calendar,
     href: "/events",
+  },
+  {
+    id: "canteens",
+    label: "Canteens",
+    icon: LayoutDashboard, // Will replace with Coffee or Utensils if needed
+    href: "/canteens",
+  },
+  {
+    id: "queues",
+    label: "Queues",
+    icon: LayoutDashboard, // Will replace with Users or similar
+    href: "/queues",
   },
   {
     id: "settings",
