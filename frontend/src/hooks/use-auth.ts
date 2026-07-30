@@ -26,12 +26,28 @@ export function useAuth() {
   });
 
   const registerMutation = useMutation({
-    mutationFn: (data: RegisterInput) => authService.register(data),
+    mutationFn: (data: RegisterInput) => {
+      // Send only the fields expected by the backend
+      const { registrationNumber, degree, currentSemester, hostelBlock, ...authData } = data;
+      return authService.register(authData as any);
+    },
     onMutate: () => setIsAuthenticating(true),
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       saveTokens(data.accessToken, data.refreshToken);
       saveUser(data.user);
       setUser(data.user);
+      
+      // Save the extra academic fields into the profile mock storage
+      const profileData = {
+        registrationNumber: variables.registrationNumber,
+        degree: variables.degree,
+        currentSemester: variables.currentSemester,
+        hostelBlock: variables.hostelBlock,
+        libraryCard: "Active (0 Overdue)",
+        shuttlePass: "Not Enrolled",
+      };
+      localStorage.setItem(`vithub_profile_${data.user.id}`, JSON.stringify(profileData));
+      
       router.push(ROUTES.DASHBOARD);
     },
     onSettled: () => setIsAuthenticating(false),

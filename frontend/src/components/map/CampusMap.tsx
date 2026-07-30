@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import '@/app/leaflet.css';
 import BuildingMarkers from './BuildingMarkers';
 import POILayers from './POILayers';
 import MockGPSShuttle from './MockGPSShuttle';
@@ -11,11 +11,11 @@ import SearchBar from './SearchBar';
 import NavigationOverlay from './NavigationOverlay';
 import { useBuildings } from '@/hooks/api/use-buildings';
 import { useRooms } from '@/hooks/api/use-rooms';
-import { useShuttles } from '@/hooks/api/use-shuttles';
+import { useAllCurrentShuttleLocations } from '@/hooks/api/use-shuttle-locations';
 import { MOCK_LANDMARKS } from '@/data/landmarks';
 import { MOCK_PARKING_ZONES } from '@/data/parking';
 import { MOCK_EMERGENCY_LOCATIONS } from '@/data/emergency';
-import { Building, Room } from '@/types/map';
+import { Building, Room, ShuttleLocation } from '@/types/map';
 
 const VIT_BHOPAL_CENTER: [number, number] = [23.0775, 76.8513];
 const DEFAULT_ZOOM = 16;
@@ -31,11 +31,19 @@ function MapRecenter({ center }: { center: [number, number] }) {
 export default function CampusMap() {
   const { data: rawBuildings = [] } = useBuildings();
   const { data: rawRooms = [] } = useRooms();
-  const { data: rawShuttles = [] } = useShuttles();
+  const { data: rawLocations = [] } = useAllCurrentShuttleLocations();
 
   const buildings = (rawBuildings || []).filter(b => b.latitude !== null && b.longitude !== null) as unknown as Building[];
   const rooms = (rawRooms || []) as unknown as Room[];
-  const shuttles = (rawShuttles || []) as unknown as any[];
+  const shuttles: ShuttleLocation[] = (rawLocations || []).map(loc => ({
+    id: loc.shuttleId,
+    shuttleName: loc.shuttleName,
+    vehicleNumber: loc.shuttleNumber,
+    latitude: loc.latitude,
+    longitude: loc.longitude,
+    speed: loc.speed,
+    nextStop: loc.currentStopName || 'Unknown',
+  }));
 
   const [center, setCenter] = useState<[number, number]>(VIT_BHOPAL_CENTER);
   const [selectedBuilding, setSelectedBuilding] = useState<Building | null>(null);

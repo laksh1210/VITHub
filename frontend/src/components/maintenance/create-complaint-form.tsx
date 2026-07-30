@@ -100,13 +100,22 @@ export function CreateComplaintForm() {
 
             <div className="space-y-2">
               <label className="text-sm font-medium">Category</label>
-              <Input
+              <FilterSelect
                 value={form.category}
-                onChange={(event) =>
-                  setForm((current) => ({ ...current, category: event.target.value }))
+                onChange={(value) =>
+                  setForm((current) => ({ ...current, category: value === "NONE" ? "" : value }))
                 }
-                placeholder="Electrical, plumbing, furniture..."
-                required
+                options={[
+                  { value: "Furniture", label: "Furniture" },
+                  { value: "Washroom Cleaning", label: "Washroom Cleaning" },
+                  { value: "Breakage", label: "Any Breakage" },
+                  { value: "Electrical / Light", label: "Electrical / Light Not Working" },
+                  { value: "Plumbing", label: "Plumbing" },
+                  { value: "HVAC / AC", label: "HVAC / AC" },
+                  { value: "Other", label: "Other" }
+                ]}
+                placeholder="Select category..."
+                allLabel="Select Category"
               />
             </div>
           </div>

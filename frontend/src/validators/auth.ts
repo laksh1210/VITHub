@@ -16,6 +16,10 @@ export const registerSchema = z.object({
   email: z.string().email("Must be a valid email address").max(150),
   password: z.string().min(8, "Password must be at least 8 characters long").max(100),
   fullName: z.string().min(1, "Full name is required").max(150),
+  registrationNumber: z.string().min(1, "Registration number is required"),
+  degree: z.string().min(1, "Degree/Major is required"),
+  currentSemester: z.string().min(1, "Current semester is required"),
+  hostelBlock: z.string().min(1, "Hostel block is required"),
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;

@@ -1,5 +1,6 @@
 import { BaseService } from "./core/base.service";
 import type { CanteenResponse } from "@/types/canteen";
+import { MOCK_CANTEENS } from "./mocks/mock-canteen-db";
 
 /**
  * Consumer for CanteenController. Phase 3 stays on the existing backend
@@ -9,20 +10,19 @@ class CanteensService extends BaseService {
   constructor() {
     super("");
   }
-  public async getAll(buildingId?: string): Promise<CanteenResponse[]> {
-    return this.get<CanteenResponse[]>("/canteens", {
-        params: buildingId ? { buildingId } : undefined,
-      });
+
+  public async getAll(): Promise<CanteenResponse[]> {
+    return Promise.resolve(MOCK_CANTEENS);
   }
 
   public async getById(id: string): Promise<CanteenResponse> {
-    return this.get<CanteenResponse>(`/canteens/${id}`);
+    const canteen = MOCK_CANTEENS.find(c => c.id === id);
+    if (!canteen) throw new Error("Canteen not found");
+    return Promise.resolve(canteen);
   }
 
-  public async getByName(name: string): Promise<CanteenResponse> {
-    return this.get<CanteenResponse>("/canteens/search", {
-        params: { name },
-      });
+  public async getActive(): Promise<CanteenResponse[]> {
+    return Promise.resolve(MOCK_CANTEENS.filter(c => c.active));
   }
 }
 

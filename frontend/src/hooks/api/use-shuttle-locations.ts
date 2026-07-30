@@ -6,6 +6,7 @@ export function useAllCurrentShuttleLocations() {
   return useQuery({
     queryKey: queryKeys.shuttleLocations.allCurrent,
     queryFn: shuttleLocationsService.getAllCurrent,
+    refetchInterval: 1000,
   });
 }
 

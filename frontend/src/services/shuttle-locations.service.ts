@@ -1,32 +1,30 @@
 import { BaseService } from "./core/base.service";
 import type { ShuttleLocationResponse } from "@/types/shuttle-location";
+import { getMockShuttleLocations } from "./mocks/mock-shuttle-db";
 
-/**
- * Consumer for ShuttleLocationController. Phase 4 uses only the existing
- * read APIs for current, latest, and history snapshots.
- */
 class ShuttleLocationsService extends BaseService {
   constructor() {
     super("");
   }
   public async getAllCurrent(): Promise<ShuttleLocationResponse[]> {
-    return this.get<ShuttleLocationResponse[]>("/shuttle-locations");
+    return Promise.resolve(getMockShuttleLocations());
   }
 
   public async getById(id: string): Promise<ShuttleLocationResponse> {
-    return this.get<ShuttleLocationResponse>(`/shuttle-locations/${id}`);
+    // Note: ID lookup is ignored in mock for simplicity
+    return Promise.resolve(getMockShuttleLocations()[0]);
   }
 
   public async getLatestByShuttleId(shuttleId: string): Promise<ShuttleLocationResponse> {
-    return this.get<ShuttleLocationResponse>(
-        `/shuttle-locations/shuttle/${shuttleId}/latest`
-      );
+    const loc = getMockShuttleLocations().find(l => l.shuttleId === shuttleId);
+    if (!loc) throw new Error("Location not found");
+    return Promise.resolve(loc);
   }
 
   public async getHistoryByShuttleId(shuttleId: string): Promise<ShuttleLocationResponse[]> {
-    return this.get<ShuttleLocationResponse[]>(
-        `/shuttle-locations/shuttle/${shuttleId}/history`
-      );
+    // Return just the current location as history for mock simplicity
+    const loc = getMockShuttleLocations().find(l => l.shuttleId === shuttleId);
+    return Promise.resolve(loc ? [loc] : []);
   }
 }
 

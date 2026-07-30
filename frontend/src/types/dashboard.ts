@@ -25,6 +25,17 @@ export interface OccupancyAnalytics {
   fullStatusCount: number;
 }
 
+export interface IndividualLibraryStats {
+  id: string;
+  name: string;
+  totalSeats: number;
+  availableSeats: number;
+  occupiedSeats: number;
+  reservedSeats: number;
+  outOfServiceSeats: number;
+  occupancyRate: number;
+}
+
 export interface LibraryAnalytics {
   totalLibraries: number;
   totalSeats: number;
@@ -33,6 +44,7 @@ export interface LibraryAnalytics {
   reservedSeats: number;
   outOfServiceSeats: number;
   occupancyRate: number;
+  libraries: IndividualLibraryStats[];
 }
 
 export interface CanteenAnalytics {

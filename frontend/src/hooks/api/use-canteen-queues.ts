@@ -5,7 +5,7 @@ import { queryKeys } from "@/lib/query/query-keys";
 export function useCanteenQueues() {
   return useQuery({
     queryKey: queryKeys.canteenQueues.all,
-    queryFn: canteenQueuesService.getAll,
+    queryFn: () => canteenQueuesService.getAll(),
   });
 }
 

@@ -4,7 +4,6 @@ import React from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import { POI_ICONS } from '@/lib/leaflet-config';
 import { ShuttleLocation } from '@/types/map';
-import { useMockGPS } from '@/hooks/useMockGPS';
 import { Bus, Navigation, Gauge } from 'lucide-react';
 
 interface MockGPSShuttleProps {
@@ -13,19 +12,13 @@ interface MockGPSShuttleProps {
 }
 
 export default function MockGPSShuttle({ showShuttles, shuttles }: MockGPSShuttleProps) {
-  const animatedGps = useMockGPS(1);
-
   if (!showShuttles) return null;
 
   return (
     <>
-      {shuttles.map((shuttle, index) => {
-        // First shuttle uses live mock GPS animated route
-        const lat = index === 0 ? animatedGps.latitude : shuttle.latitude;
-        const lng = index === 0 ? animatedGps.longitude : shuttle.longitude;
-
+      {shuttles.map((shuttle) => {
         return (
-          <Marker key={shuttle.id} position={[lat, lng]} icon={POI_ICONS.SHUTTLE}>
+          <Marker key={shuttle.id} position={[shuttle.latitude, shuttle.longitude]} icon={POI_ICONS.SHUTTLE}>
             <Popup>
               <div className="p-1 min-w-48">
                 <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-xs mb-1">

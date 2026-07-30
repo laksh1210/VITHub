@@ -33,7 +33,38 @@ class DashboardService extends BaseService {
   }
 
   public async getLibraryAnalytics(): Promise<LibraryAnalytics> {
-    return this.get<LibraryAnalytics>(API_ENDPOINTS.ANALYTICS.LIBRARY);
+    // Return mock data for AB1 and AB2 libraries
+    return Promise.resolve({
+      totalLibraries: 2,
+      totalSeats: 300,
+      availableSeats: 120,
+      occupiedSeats: 160,
+      reservedSeats: 10,
+      outOfServiceSeats: 10,
+      occupancyRate: 53.3,
+      libraries: [
+        {
+          id: 'AB1',
+          name: 'VIT AB1 Library',
+          totalSeats: 150,
+          availableSeats: 45,
+          occupiedSeats: 95,
+          reservedSeats: 5,
+          outOfServiceSeats: 5,
+          occupancyRate: 63.3,
+        },
+        {
+          id: 'AB2',
+          name: 'VIT AB2 Library',
+          totalSeats: 150,
+          availableSeats: 75,
+          occupiedSeats: 65,
+          reservedSeats: 5,
+          outOfServiceSeats: 5,
+          occupancyRate: 43.3,
+        }
+      ]
+    });
   }
 
   public async getCanteenAnalytics(): Promise<CanteenAnalytics> {

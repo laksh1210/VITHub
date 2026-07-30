@@ -5,23 +5,28 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Colors */
-  --background: #ffffff;
-  --foreground: #09090B;
-  --primary: #6C63FF;
-  --secondary: #A78BFA;
-  --accent: #C4B5FD;
-  --card: #ffffff;
-  --card-foreground: #09090B;
-  --popover: #ffffff;
-  --popover-foreground: #09090B;
-  --border: #e4e4e7;
-  --ring: #6C63FF;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --destructive: #ef4444;
-  --destructive-foreground: #fafafa;
+  /* Light Theme (Majestic Marble/Sand) */
+  --background: #F9F8F6; /* Warm light cream */
+  --foreground: #3A352F; /* Dark warm gray */
+  --primary: #C1A784; /* Swatch 1: Sand/Camel */
+  --secondary: #C9BEA7; /* Swatch 2: Warm Beige */
+  --accent: #F6E5B8; /* Swatch 5: Pale Yellow Cream */
+  --card: #FFFFFF; /* Swatch 4: Pure White */
+  --card-foreground: #3A352F;
+  --popover: #FFFFFF;
+  --popover-foreground: #3A352F;
+  --border: #EAE6DA; /* Swatch 3: Off-White Cream */
+  --ring: #C1A784; 
+  --muted: #EAE6DA;
+  --muted-foreground: #8B8274;
+  --destructive: #dc2626;
+  --destructive-foreground: #f8fafc;
   --radius: 0.5rem;
+  
+  /* Glassmorphism Light */
+  --glass-bg: rgba(249, 248, 246, 0.75);
+  --glass-card-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.08);
 }
 
 .dark {
@@ -41,6 +46,11 @@
   --muted-foreground: #a1a1aa;
   --destructive: #7f1d1d;
   --destructive-foreground: #fecaca;
+
+  /* Glassmorphism Dark */
+  --glass-bg: rgba(24, 24, 27, 0.75);
+  --glass-card-bg: rgba(24, 24, 27, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
 @theme inline {
@@ -106,17 +116,17 @@
   }
 }/* Glassmorphism Utilities */
 .glass-panel {
-  background: rgba(24, 24, 27, 0.75);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
 }
 
 .glass-card {
-  background: rgba(24, 24, 27, 0.6);
+  background: var(--glass-card-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(39, 39, 42, 0.8);
+  border: 1px solid var(--glass-border);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
