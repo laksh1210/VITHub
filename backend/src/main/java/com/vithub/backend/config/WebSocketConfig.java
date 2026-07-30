@@ -45,14 +45,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.setErrorHandler(webSocketExceptionHandler);
         registry.addEndpoint(WebSocketConstants.WEBSOCKET_ENDPOINT)
                 .setAllowedOriginPatterns(allowedOrigins.split(","))
                 .withSockJS();
-    }
-
-    @Override
-    public void configureWebSocketTransport(WebSocketTransportRegistration registration) {
-        registration.setErrorHandler(webSocketExceptionHandler);
     }
 
 }
