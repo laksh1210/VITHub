@@ -36,7 +36,7 @@ export function useEventsByCategory(category: string) {
 export function useEventsByBuilding(buildingId: string) {
   return useQuery({
     queryKey: queryKeys.events.byBuilding(buildingId),
-    queryFn: () => eventsService.getByBuilding(buildingId),
+    queryFn: () => eventsService.getByBuildingId(buildingId),
     enabled: Boolean(buildingId),
   });
 }
