@@ -13,10 +13,12 @@ class AuthService extends BaseService {
     return new Promise(resolve => setTimeout(() => resolve({
       accessToken: "mock_token",
       refreshToken: "mock_refresh",
+      tokenType: "Bearer",
+      expiresIn: 3600,
       user: {
         id: "mock_user",
-        email: payload.email || "test@test.com",
-        username: payload.username || "mock_user",
+        email: payload.usernameOrEmail.includes("@") ? payload.usernameOrEmail : "test@test.com",
+        username: payload.usernameOrEmail,
         fullName: "Mock User",
         roles: ["STUDENT"],
       }
@@ -27,6 +29,8 @@ class AuthService extends BaseService {
     return new Promise(resolve => setTimeout(() => resolve({
       accessToken: "mock_token",
       refreshToken: "mock_refresh",
+      tokenType: "Bearer",
+      expiresIn: 3600,
       user: {
         id: "mock_user",
         email: payload.email,
