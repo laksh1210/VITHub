@@ -19,7 +19,7 @@ export default function MaintenanceDetailPage() {
   const params = useParams<{ id: string }>();
   const id = params.id;
 
-  const { data: request, isLoading, isError, refetch } = useMaintenanceRequest(id);
+  const { data: request, isLoading, isError } = useMaintenanceRequest(id);
 
   return (
     <div className="mx-auto max-w-5xl space-y-6">

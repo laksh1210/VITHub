@@ -34,7 +34,7 @@ const SORT_OPTIONS: SortOption[] = [
 ];
 
 export default function EventsPage() {
-  const { data, isLoading, isError, refetch } = useEvents();
+  const { data, isLoading, isError } = useEvents();
 
   const [segment, setSegment] = useState<"upcoming" | "past">("upcoming");
   const [search, setSearch] = useState("");

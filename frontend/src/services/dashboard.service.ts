@@ -69,7 +69,25 @@ class DashboardService extends BaseService {
   }
 
   public async getNotifications(): Promise<NotificationItem[]> {
-    return this.get<NotificationItem[]>(API_ENDPOINTS.NOTIFICATIONS.LIST);
+    // Return mock data because the backend /notifications endpoint is missing
+    return Promise.resolve([
+      {
+        id: "1",
+        title: "System Update",
+        message: "Campus Map Digital Twin has been successfully integrated.",
+        type: "SYSTEM",
+        status: "UNREAD",
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: "2",
+        title: "Maintenance Alert",
+        message: "AB-1 Elevators will be under maintenance tomorrow from 10 AM to 12 PM.",
+        type: "MAINTENANCE",
+        status: "UNREAD",
+        createdAt: new Date(Date.now() - 3600000).toISOString() // 1 hour ago
+      }
+    ]);
   }
 }
 

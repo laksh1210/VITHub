@@ -31,7 +31,7 @@ export default function LoginPage() {
   async function onSubmit(data: LoginInput) {
     try {
       await login(data);
-    } catch (_error) {
+    } catch {
       // Handled by react-query error state
     }
   }

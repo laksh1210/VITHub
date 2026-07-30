@@ -17,7 +17,7 @@ export default function QueueDetailPage() {
   const params = useParams<{ id: string }>();
   const id = params.id;
 
-  const { data: queue, isLoading, isError, refetch } = useCanteenQueue(id);
+  const { data: queue, isLoading, isError } = useCanteenQueue(id);
   const { data: canteen } = useCanteen(queue?.canteenId ?? "");
 
   return (

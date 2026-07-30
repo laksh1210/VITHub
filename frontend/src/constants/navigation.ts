@@ -1,4 +1,4 @@
-import { LayoutDashboard, Map, Bot, BookOpen, Bus, Wrench, Calendar, Bell, Settings, type LucideIcon } from "lucide-react";
+import { LayoutDashboard, Map, Bot, BookOpen, Bus, Wrench, Calendar, Bell, Settings, User, type LucideIcon } from "lucide-react";
 
 export type NavItem = {
   id: string;
@@ -22,7 +22,13 @@ export const SIDEBAR_NAV: NavItem[] = [
     id: "map",
     label: "Campus Map",
     icon: Map,
-    href: "/maps",
+    href: "/map",
+  },
+  {
+    id: "profile",
+    label: "Profile",
+    icon: User,
+    href: "/profile",
   },
   {
     id: "ai",

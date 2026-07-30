@@ -35,7 +35,7 @@ function QueuesPageContent() {
   const searchParams = useSearchParams();
   const initialCanteenId = searchParams.get("canteenId") ?? "ALL";
 
-  const { data: queues, isLoading, isError, refetch } = useCanteenQueues();
+  const { data: queues, isLoading, isError } = useCanteenQueues();
 
   const [search, setSearch] = useState("");
   const [buildingId, setBuildingId] = useState("ALL");

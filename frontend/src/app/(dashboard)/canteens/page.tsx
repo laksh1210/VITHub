@@ -26,7 +26,7 @@ const SORT_OPTIONS: SortOption[] = [
 ];
 
 export default function CanteensPage() {
-  const { data: canteens, isLoading, isError, refetch } = useCanteens();
+  const { data: canteens, isLoading, isError } = useCanteens();
 
   const [search, setSearch] = useState("");
   const [buildingId, setBuildingId] = useState("ALL");

@@ -32,7 +32,7 @@ export default function ShuttleDetailPage() {
   const params = useParams<{ id: string }>();
   const id = params.id;
 
-  const { data: shuttle, isLoading, isError, refetch } = useShuttle(id);
+  const { data: shuttle, isLoading, isError } = useShuttle(id);
   const { data: latestLocation, isLoading: latestLoading } = useLatestShuttleLocation(id);
   const { data: history, isLoading: historyLoading } = useShuttleLocationHistory(id);
 

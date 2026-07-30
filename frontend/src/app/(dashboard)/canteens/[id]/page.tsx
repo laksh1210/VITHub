@@ -19,7 +19,7 @@ export default function CanteenDetailPage() {
   const params = useParams<{ id: string }>();
   const id = params.id;
 
-  const { data: canteen, isLoading, isError, refetch } = useCanteen(id);
+  const { data: canteen, isLoading, isError } = useCanteen(id);
   const { data: queues, isLoading: queuesLoading, isError: queuesError } = useCanteenQueues();
 
   const queue = queues?.find((item) => item.canteenId === id);

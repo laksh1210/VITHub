@@ -31,7 +31,7 @@ export default function RegisterPage() {
   async function onSubmit(data: RegisterInput) {
     try {
       await register(data);
-    } catch (_error) {
+    } catch {
       // Handled by react-query error state
     }
   }

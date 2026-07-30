@@ -41,7 +41,7 @@ const STATUS_WEIGHT = {
 } as const;
 
 export default function MaintenancePage() {
-  const { data, isLoading, isError, refetch } = useMyMaintenanceRequests();
+  const { data, isLoading, isError } = useMyMaintenanceRequests();
 
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("ALL");

@@ -32,14 +32,12 @@ export default function ShuttlesPage() {
   const {
     data: shuttles,
     isLoading: shuttlesLoading,
-    isError: shuttlesError,
-    refetch: refetchShuttles,
+    isError: shuttlesError
   } = useShuttles();
   const {
     data: locations,
     isLoading: locationsLoading,
-    isError: locationsError,
-    refetch: refetchLocations,
+    isError: locationsError
   } = useAllCurrentShuttleLocations();
 
   const [search, setSearch] = useState("");

@@ -25,7 +25,7 @@ export default function EventDetailPage() {
   const params = useParams<{ id: string }>();
   const id = params.id;
 
-  const { data: event, isLoading, isError, refetch } = useEvent(id);
+  const { data: event, isLoading, isError } = useEvent(id);
 
   return (
     <div className="mx-auto max-w-5xl space-y-6">
