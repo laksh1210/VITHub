@@ -1,0 +1,24 @@
+export function downloadBlob(blob: Blob, filename: string) {
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.style.display = "none";
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  window.URL.revokeObjectURL(url);
+  document.body.removeChild(a);
+}
+
+export function createUploadConfig(
+  onProgress?: (progressEvent: unknown) => void,
+  signal?: AbortSignal
+) {
+  return {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    onUploadProgress: onProgress,
+    signal,
+  };
+}
