@@ -10,11 +10,31 @@ class AuthService extends BaseService {
   }
 
   async login(payload: LoginInput, config?: AxiosRequestConfig): Promise<AuthResponse> {
-    return this.post<AuthResponse>(API_ENDPOINTS.AUTH.LOGIN, payload, config);
+    return Promise.resolve({
+      accessToken: "mock_token",
+      refreshToken: "mock_refresh",
+      user: {
+        id: "mock_user",
+        email: payload.email,
+        username: payload.username || "mock_user",
+        fullName: "Mock User",
+        roles: ["STUDENT"],
+      }
+    });
   }
 
   async register(payload: RegisterInput, config?: AxiosRequestConfig): Promise<AuthResponse> {
-    return this.post<AuthResponse>(API_ENDPOINTS.AUTH.REGISTER, payload, config);
+    return Promise.resolve({
+      accessToken: "mock_token",
+      refreshToken: "mock_refresh",
+      user: {
+        id: "mock_user",
+        email: payload.email,
+        username: payload.username,
+        fullName: payload.fullName,
+        roles: ["STUDENT"],
+      }
+    });
   }
 }
 
