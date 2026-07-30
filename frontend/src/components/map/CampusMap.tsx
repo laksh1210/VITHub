@@ -36,13 +36,16 @@ export default function CampusMap() {
   const buildings = (rawBuildings || []).filter(b => b.latitude !== null && b.longitude !== null) as unknown as Building[];
   const rooms = (rawRooms || []) as unknown as Room[];
   const shuttles: ShuttleLocation[] = (rawLocations || []).map(loc => ({
-    id: loc.shuttleId,
+    id: loc.id,
+    shuttleId: loc.shuttleId,
     shuttleName: loc.shuttleName,
     vehicleNumber: loc.shuttleNumber,
     latitude: loc.latitude,
     longitude: loc.longitude,
     speed: loc.speed,
+    heading: 0, // Fallback heading
     nextStop: loc.currentStopName || 'Unknown',
+    timestamp: loc.lastUpdatedAt || new Date().toISOString()
   }));
 
   const [center, setCenter] = useState<[number, number]>(VIT_BHOPAL_CENTER);
