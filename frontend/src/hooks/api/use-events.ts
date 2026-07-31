@@ -6,14 +6,14 @@ import type { EventStatus } from "@/types/event";
 export function useEvents() {
   return useQuery({
     queryKey: queryKeys.events.all,
-    queryFn: eventsService.getAll,
+    queryFn: () => eventsService.getAll(),
   });
 }
 
 export function useUpcomingEvents() {
   return useQuery({
     queryKey: queryKeys.events.upcoming(),
-    queryFn: eventsService.getUpcoming,
+    queryFn: () => eventsService.getUpcoming(),
   });
 }
 

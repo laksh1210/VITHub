@@ -5,7 +5,7 @@ import { queryKeys } from "@/lib/query/query-keys";
 export function useBuildings() {
   return useQuery({
     queryKey: queryKeys.buildings.all,
-    queryFn: buildingsService.getAll,
+    queryFn: () => buildingsService.getAll(),
   });
 }
 

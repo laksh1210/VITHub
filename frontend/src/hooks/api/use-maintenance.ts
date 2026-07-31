@@ -7,17 +7,17 @@ import type {
   Priority,
 } from "@/types/maintenance";
 
-export function useAllMaintenanceRequests() {
+export function useMaintenanceRequests() {
   return useQuery({
     queryKey: queryKeys.maintenance.all,
-    queryFn: maintenanceService.getAll,
+    queryFn: () => maintenanceService.getAll(),
   });
 }
 
 export function useMyMaintenanceRequests() {
   return useQuery({
     queryKey: queryKeys.maintenance.my,
-    queryFn: maintenanceService.getMy,
+    queryFn: () => maintenanceService.getMy(),
   });
 }
 
