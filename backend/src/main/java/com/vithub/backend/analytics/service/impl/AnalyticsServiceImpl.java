@@ -10,6 +10,7 @@ import com.vithub.backend.canteen.repository.CanteenRepository;
 import com.vithub.backend.events.entity.EventStatus;
 import com.vithub.backend.events.repository.EventRepository;
 import com.vithub.backend.library.repository.LibraryRepository;
+import com.vithub.backend.library.seat.entity.LibrarySeat;
 import com.vithub.backend.library.seat.entity.SeatStatus;
 import com.vithub.backend.library.seat.repository.LibrarySeatRepository;
 import com.vithub.backend.maintenance.entity.MaintenanceStatus;
@@ -28,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Default implementation of {@link AnalyticsService}.
@@ -121,13 +123,37 @@ public class AnalyticsServiceImpl implements AnalyticsService {
     @Override
     @Transactional(readOnly = true)
     public AnalyticsSummaryDTO.LibraryAnalytics getLibraryAnalytics() {
-        long totalSeats = librarySeatRepository.count();
-        long availableSeats = librarySeatRepository.findAllByStatusOrderBySeatNumberAsc(SeatStatus.AVAILABLE).size();
-        long occupiedSeats = librarySeatRepository.findAllByStatusOrderBySeatNumberAsc(SeatStatus.OCCUPIED).size();
-        long reservedSeats = librarySeatRepository.findAllByStatusOrderBySeatNumberAsc(SeatStatus.RESERVED).size();
-        long outOfServiceSeats =
-                librarySeatRepository.findAllByStatusOrderBySeatNumberAsc(SeatStatus.OUT_OF_SERVICE).size();
+        List<LibrarySeat> allSeats = librarySeatRepository.findAll();
+        long totalSeats = allSeats.size();
+        long availableSeats = allSeats.stream().filter(s -> s.getStatus() == SeatStatus.AVAILABLE).count();
+        long occupiedSeats = allSeats.stream().filter(s -> s.getStatus() == SeatStatus.OCCUPIED).count();
+        long reservedSeats = allSeats.stream().filter(s -> s.getStatus() == SeatStatus.RESERVED).count();
+        long outOfServiceSeats = allSeats.stream().filter(s -> s.getStatus() == SeatStatus.OUT_OF_SERVICE).count();
         double occupancyRate = totalSeats > 0 ? (occupiedSeats * 100.0) / totalSeats : 0.0;
+
+        List<AnalyticsSummaryDTO.IndividualLibraryStats> libraryStats = libraryRepository.findAll().stream().map(lib -> {
+            List<LibrarySeat> libSeats = allSeats.stream()
+                    .filter(s -> s.getLibrary().getId().equals(lib.getId()))
+                    .toList();
+            
+            long libTotalSeats = libSeats.size();
+            long libAvailable = libSeats.stream().filter(s -> s.getStatus() == SeatStatus.AVAILABLE).count();
+            long libOccupied = libSeats.stream().filter(s -> s.getStatus() == SeatStatus.OCCUPIED).count();
+            long libReserved = libSeats.stream().filter(s -> s.getStatus() == SeatStatus.RESERVED).count();
+            long libOutOfService = libSeats.stream().filter(s -> s.getStatus() == SeatStatus.OUT_OF_SERVICE).count();
+            double libOccupancyRate = libTotalSeats > 0 ? (libOccupied * 100.0) / libTotalSeats : 0.0;
+
+            return AnalyticsSummaryDTO.IndividualLibraryStats.builder()
+                    .id(lib.getId().toString())
+                    .name(lib.getName())
+                    .totalSeats(libTotalSeats > 0 ? libTotalSeats : lib.getTotalSeats())
+                    .availableSeats(libAvailable)
+                    .occupiedSeats(libOccupied)
+                    .reservedSeats(libReserved)
+                    .outOfServiceSeats(libOutOfService)
+                    .occupancyRate(libOccupancyRate)
+                    .build();
+        }).collect(Collectors.toList());
 
         return AnalyticsSummaryDTO.LibraryAnalytics.builder()
                 .totalLibraries(libraryRepository.count())
@@ -137,6 +163,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
                 .reservedSeats(reservedSeats)
                 .outOfServiceSeats(outOfServiceSeats)
                 .occupancyRate(occupancyRate)
+                .libraries(libraryStats)
                 .build();
     }
 

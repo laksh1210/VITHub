@@ -2,6 +2,7 @@ package com.vithub.backend.analytics.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -68,6 +69,22 @@ public class AnalyticsSummaryDTO {
     @Builder
     public static class LibraryAnalytics {
         private long totalLibraries;
+        private long totalSeats;
+        private long availableSeats;
+        private long occupiedSeats;
+        private long reservedSeats;
+        private long outOfServiceSeats;
+        private double occupancyRate;
+        private List<IndividualLibraryStats> libraries;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class IndividualLibraryStats {
+        private String id;
+        private String name;
         private long totalSeats;
         private long availableSeats;
         private long occupiedSeats;
