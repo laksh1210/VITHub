@@ -50,20 +50,20 @@ export default function CanteenQueueWidget() {
   const avgWait = analytics?.averageEstimatedWaitMinutes ?? 0;
 
   return (
-    <div className="p-6 rounded-2xl bg-card border border-border space-y-6 shadow-xl">
+    <div className="p-4 sm:p-6 rounded-2xl bg-card border border-border space-y-6 shadow-xl">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex shrink-0 items-center justify-center text-amber-400">
             <Coffee className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-foreground tracking-tight">Canteen Queue & Wait Time</h3>
-            <p className="text-xs text-muted-foreground">Live food court rush and queue telemetry</p>
+            <h3 className="text-base font-bold text-foreground tracking-tight line-clamp-1">Canteen Queue & Wait Time</h3>
+            <p className="text-xs text-muted-foreground line-clamp-1">Live food court rush and queue telemetry</p>
           </div>
         </div>
 
-        <div className="text-right">
+        <div className="sm:text-right shrink-0">
           <span className="text-2xl font-black text-amber-400">{avgWait.toFixed(0)} min</span>
           <span className="block text-[10px] text-muted-foreground">Avg Wait Time</span>
         </div>
