@@ -25,7 +25,7 @@ class EventsService extends BaseService {
     return this.get<EventResponse[]>(`/events/category/${category}`);
   }
 
-  public async getByBuilding(buildingId: string): Promise<EventResponse[]> {
+  public async getByBuildingId(buildingId: string): Promise<EventResponse[]> {
     return this.get<EventResponse[]>(`/events/building/${buildingId}`);
   }
 
