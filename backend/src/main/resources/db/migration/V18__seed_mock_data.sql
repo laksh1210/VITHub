@@ -2,7 +2,7 @@
 -- Seed the database with initial realistic mock data to populate the frontend dashboard widgets.
 
 -- 1. Insert a dummy System User for foreign key constraints (events, maintenance)
-INSERT INTO users (id, username, email, full_name, password_hash)
+INSERT INTO users (id, username, email, full_name, password)
 VALUES ('11111111-1111-1111-1111-111111111111', 'admin', 'admin@vithub.com', 'System Admin', 'mock_hash')
 ON CONFLICT DO NOTHING;
 
