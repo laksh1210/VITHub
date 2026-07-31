@@ -31,9 +31,11 @@ export function LandingHero() {
           </span>
         </motion.h1>
         
-        <motion.p variants={slideUp} className="w-full text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl leading-relaxed tracking-tight">
-          Navigate the campus, find empty classrooms, track shuttles, and get instant answers with our intelligent AI assistant. One unified platform for everything.
-        </motion.p>
+        <div className="w-full flex justify-center px-4">
+          <motion.p variants={slideUp} className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed tracking-tight" style={{ width: "100%", maxWidth: "800px", margin: "0 auto" }}>
+            Navigate the campus, find empty classrooms, track shuttles, and get instant answers with our intelligent AI assistant. One unified platform for everything.
+          </motion.p>
+        </div>
         
         <motion.div variants={slideUp} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-20 p-2 rounded-3xl bg-white/5 dark:bg-black/20 border border-white/10 backdrop-blur-xl shadow-2xl">
           <Button render={<Link href="/register" />} size="lg" className="w-full sm:w-auto rounded-2xl px-10 text-lg h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold shadow-[0_0_40px_-10px_var(--primary)] transition-all">

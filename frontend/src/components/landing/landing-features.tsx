@@ -75,9 +75,11 @@ export function LandingFeatures() {
               in one place
             </span>
           </motion.h2>
-          <motion.p variants={slideUp} className="text-xl text-muted-foreground w-full max-w-2xl mx-auto leading-relaxed">
-            Say goodbye to juggling multiple apps. VITHub brings the entire campus ecosystem into a single, cohesive experience.
-          </motion.p>
+          <div className="w-full flex justify-center px-4">
+            <motion.p variants={slideUp} className="text-xl text-muted-foreground leading-relaxed" style={{ width: "100%", maxWidth: "600px", margin: "0 auto" }}>
+              Say goodbye to juggling multiple apps. VITHub brings the entire campus ecosystem into a single, cohesive experience.
+            </motion.p>
+          </div>
         </motion.div>
 
         <motion.div
