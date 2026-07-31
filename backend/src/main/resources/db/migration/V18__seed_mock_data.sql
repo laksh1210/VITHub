@@ -25,9 +25,9 @@ INSERT INTO canteens (id, building_id, name, description, floor, seating_capacit
 ON CONFLICT (building_id, name) DO NOTHING;
 
 -- 5. Seed Canteen Queues
-INSERT INTO canteen_queue (id, canteen_id, current_queue_size, estimated_wait_minutes, is_accepting_orders, status) VALUES
-('55555555-5555-5555-5555-555555555551', '44444444-4444-4444-4444-444444444441', 25, 15, true, 'BUSY'),
-('55555555-5555-5555-5555-555555555552', '44444444-4444-4444-4444-444444444442', 5, 3, true, 'NORMAL')
+INSERT INTO canteen_queue (id, canteen_id, queue_count, estimated_wait_minutes, status) VALUES
+('55555555-5555-5555-5555-555555555551', '44444444-4444-4444-4444-444444444441', 25, 15, 'BUSY'),
+('55555555-5555-5555-5555-555555555552', '44444444-4444-4444-4444-444444444442', 5, 3, 'NORMAL')
 ON CONFLICT (canteen_id) DO NOTHING;
 
 -- 6. Seed Shuttles
@@ -37,10 +37,10 @@ INSERT INTO shuttles (id, shuttle_number, shuttle_name, driver_name, driver_cont
 ON CONFLICT (shuttle_number) DO NOTHING;
 
 -- 7. Seed Shuttle Locations
-INSERT INTO shuttle_locations (id, shuttle_id, latitude, longitude, speed, heading, last_updated_at) VALUES
-('77777777-7777-7777-7777-777777777771', '66666666-6666-6666-6666-666666666661', 23.0770, 76.8510, 15.5, 90.0, now()),
-('77777777-7777-7777-7777-777777777772', '66666666-6666-6666-6666-666666666662', 23.0765, 76.8505, 0.0, 0.0, now())
-ON CONFLICT (shuttle_id) DO NOTHING;
+INSERT INTO shuttle_locations (id, shuttle_id, latitude, longitude, speed, direction, last_updated_at) VALUES
+('77777777-7777-7777-7777-777777777771', '66666666-6666-6666-6666-666666666661', 23.0770, 76.8510, 15.5, 'EAST', now()),
+('77777777-7777-7777-7777-777777777772', '66666666-6666-6666-6666-666666666662', 23.0765, 76.8505, 0.0, 'STATIONARY', now())
+ON CONFLICT DO NOTHING;
 
 -- 8. Seed Events
 INSERT INTO events (id, title, description, category, event_type, organizer, start_date_time, end_date_time, venue, building_id, capacity, status, created_by) VALUES
