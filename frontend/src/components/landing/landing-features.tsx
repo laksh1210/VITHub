@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { staggerContainer, slideUp } from "@/lib/motion";
 import { Map, Bot, Building2, Library, Bus, Wrench, Calendar, Bell } from "lucide-react";
@@ -12,12 +13,14 @@ const features = [
     description: "Interactive 3D maps to find any room or building effortlessly.",
     icon: Map,
     className: "md:col-span-2 md:row-span-2",
+    image: "/bento-map.jpg",
   },
   {
     title: "Events",
     description: "Stay updated on campus events, clubs, and academic schedules.",
     icon: Calendar,
     className: "md:col-span-2 md:row-span-1",
+    image: "/bento-events.jpg",
   },
   {
     title: "AI Assistant",
@@ -92,7 +95,14 @@ export function LandingFeatures() {
           {features.map((feature, idx) => (
             <motion.div key={idx} variants={slideUp} className={cn("h-full w-full", feature.className)}>
               <Card className="h-full w-full border-white/10 bg-white/5 dark:bg-black/40 backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-white/10 dark:hover:bg-white/5 group flex flex-col justify-between overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {feature.image && (
+                  <div className="absolute inset-0 z-0">
+                    <Image src={feature.image} alt={feature.title} fill className="object-cover opacity-30 group-hover:opacity-60 transition-opacity duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent mix-blend-multiply" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-background/80 to-transparent" />
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
                 <CardHeader className="relative z-10">
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:bg-primary/20">
                     <feature.icon className="w-7 h-7 text-primary" />
