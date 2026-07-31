@@ -182,14 +182,9 @@ export default function MaintenancePage() {
 
       {isLoading && (view === "card" ? <SkeletonCardGrid /> : <SkeletonTable />)}
 
-      {isError && !isLoading && (
-        <ErrorState
-          description="Maintenance complaints couldn't be loaded. Make sure you're authenticated and NEXT_PUBLIC_API_BASE_URL is correct."
-          
-        />
-      )}
+      {/* If there's an error, we gracefully fallback to the empty state as requested */}
 
-      {!isLoading && !isError && requests.length === 0 && (
+      {(!isLoading && requests.length === 0) && (
         <EmptyState
           icon={data && data.length > 0 ? <SearchX className="h-10 w-10 text-muted-foreground" /> : <Wrench className="h-10 w-10 text-muted-foreground" />}
           title={data && data.length > 0 ? "No complaints match your filters" : "No complaints yet"}
