@@ -31,7 +31,7 @@ export function LandingHero() {
           </span>
         </motion.h1>
         
-        <motion.p variants={slideUp} className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl leading-relaxed tracking-tight">
+        <motion.p variants={slideUp} className="w-full text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl leading-relaxed tracking-tight">
           Navigate the campus, find empty classrooms, track shuttles, and get instant answers with our intelligent AI assistant. One unified platform for everything.
         </motion.p>
         

@@ -67,7 +67,7 @@ export function LandingFeatures() {
           whileInView="animate"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-20 flex flex-col items-center"
+          className="w-full text-center mb-20 flex flex-col items-center"
         >
           <motion.h2 variants={slideUp} className="text-4xl md:text-6xl font-black mb-6 tracking-tighter">
             Everything you need <br className="hidden md:block" />
