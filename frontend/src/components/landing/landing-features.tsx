@@ -14,6 +14,12 @@ const features = [
     className: "md:col-span-2 md:row-span-2",
   },
   {
+    title: "Events",
+    description: "Stay updated on campus events, clubs, and academic schedules.",
+    icon: Calendar,
+    className: "md:col-span-2 md:row-span-1",
+  },
+  {
     title: "AI Assistant",
     description: "Ask anything about the campus and get instant intelligent answers.",
     icon: Bot,
@@ -29,7 +35,7 @@ const features = [
     title: "Library Availability",
     description: "Check study space availability and search for books instantly.",
     icon: Library,
-    className: "md:col-span-1 md:row-span-2",
+    className: "md:col-span-1 md:row-span-1",
   },
   {
     title: "Shuttle Tracking",
@@ -42,12 +48,6 @@ const features = [
     description: "Report issues and track maintenance requests in real-time.",
     icon: Wrench,
     className: "md:col-span-1 md:row-span-1",
-  },
-  {
-    title: "Events",
-    description: "Stay updated on campus events, clubs, and academic schedules.",
-    icon: Calendar,
-    className: "md:col-span-2 md:row-span-1",
   },
   {
     title: "Notifications",
@@ -67,7 +67,7 @@ export function LandingFeatures() {
           whileInView="animate"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="text-center mb-20"
+          className="text-center mb-20 flex flex-col items-center"
         >
           <motion.h2 variants={slideUp} className="text-4xl md:text-6xl font-black mb-6 tracking-tighter">
             Everything you need <br className="hidden md:block" />
@@ -75,7 +75,7 @@ export function LandingFeatures() {
               in one place
             </span>
           </motion.h2>
-          <motion.p variants={slideUp} className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+          <motion.p variants={slideUp} className="text-xl text-muted-foreground w-full max-w-2xl mx-auto leading-relaxed">
             Say goodbye to juggling multiple apps. VITHub brings the entire campus ecosystem into a single, cohesive experience.
           </motion.p>
         </motion.div>
@@ -85,11 +85,11 @@ export function LandingFeatures() {
           whileInView="animate"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="grid grid-cols-1 md:grid-cols-4 auto-rows-[250px] gap-6"
+          className="grid grid-cols-1 md:grid-cols-4 auto-rows-[220px] gap-6"
         >
           {features.map((feature, idx) => (
-            <motion.div key={idx} variants={slideUp} className={cn("h-full", feature.className)}>
-              <Card className="h-full border-white/10 bg-white/5 dark:bg-black/40 backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-white/10 dark:hover:bg-white/5 group flex flex-col justify-between overflow-hidden relative">
+            <motion.div key={idx} variants={slideUp} className={cn("h-full w-full", feature.className)}>
+              <Card className="h-full w-full border-white/10 bg-white/5 dark:bg-black/40 backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:bg-white/10 dark:hover:bg-white/5 group flex flex-col justify-between overflow-hidden relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <CardHeader className="relative z-10">
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:bg-primary/20">
