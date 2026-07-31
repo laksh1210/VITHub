@@ -1,27 +1,27 @@
 import { BaseService } from "./core/base.service";
 import type { ShuttleResponse, ShuttleStatus } from "@/types/shuttle";
-import { MOCK_SHUTTLES } from "./mocks/mock-shuttle-db";
 
+/**
+ * Consumer for ShuttleController. Phase 4 uses only the existing read APIs.
+ */
 class ShuttlesService extends BaseService {
   constructor() {
     super("");
   }
   public async getAll(): Promise<ShuttleResponse[]> {
-    return Promise.resolve(MOCK_SHUTTLES);
+    return this.get<ShuttleResponse[]>("/shuttle");
   }
 
   public async getActive(): Promise<ShuttleResponse[]> {
-    return Promise.resolve(MOCK_SHUTTLES.filter(s => s.status === "ACTIVE"));
+    return this.get<ShuttleResponse[]>("/shuttle/active");
   }
 
   public async getByStatus(status: ShuttleStatus): Promise<ShuttleResponse[]> {
-    return Promise.resolve(MOCK_SHUTTLES.filter(s => s.status === status));
+    return this.get<ShuttleResponse[]>(`/shuttle/status/${status}`);
   }
 
   public async getById(id: string): Promise<ShuttleResponse> {
-    const shuttle = MOCK_SHUTTLES.find(s => s.id === id);
-    if (!shuttle) throw new Error("Shuttle not found");
-    return Promise.resolve(shuttle);
+    return this.get<ShuttleResponse>(`/shuttle/${id}`);
   }
 }
 
