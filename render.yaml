@@ -6,15 +6,23 @@ services:
     plan: free
     region: ohio
     envVars:
-      - key: SPRING_DATASOURCE_URL
+      - key: DB_HOST
         fromDatabase:
           name: vithub-db
-          property: connectionString
-      - key: SPRING_DATASOURCE_USERNAME
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: vithub-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: vithub-db
+          property: database
+      - key: DB_USERNAME
         fromDatabase:
           name: vithub-db
           property: user
-      - key: SPRING_DATASOURCE_PASSWORD
+      - key: DB_PASSWORD
         fromDatabase:
           name: vithub-db
           property: password
