@@ -6,14 +6,14 @@ import type { ShuttleStatus } from "@/types/shuttle";
 export function useShuttles() {
   return useQuery({
     queryKey: queryKeys.shuttles.all,
-    queryFn: shuttlesService.getAll,
+    queryFn: () => shuttlesService.getAll(),
   });
 }
 
 export function useActiveShuttles() {
   return useQuery({
     queryKey: queryKeys.shuttles.active,
-    queryFn: shuttlesService.getActive,
+    queryFn: () => shuttlesService.getActive(),
   });
 }
 

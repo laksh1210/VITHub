@@ -5,7 +5,7 @@ import { queryKeys } from "@/lib/query/query-keys";
 export function useAllCurrentShuttleLocations() {
   return useQuery({
     queryKey: queryKeys.shuttleLocations.allCurrent,
-    queryFn: shuttleLocationsService.getAllCurrent,
+    queryFn: () => shuttleLocationsService.getAllCurrent(),
     refetchInterval: 1000,
   });
 }
