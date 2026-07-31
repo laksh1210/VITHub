@@ -45,7 +45,7 @@ export default function EventsPage() {
   const [view, setView] = useState<ViewMode>("card");
 
   const events = useMemo(() => {
-    const now = new Date("2026-07-30T00:00:00+05:30").getTime();
+    const now = Date.now();
     const source = data ?? [];
 
     let result = source.filter((event) => {
