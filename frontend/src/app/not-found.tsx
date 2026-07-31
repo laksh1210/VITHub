@@ -5,7 +5,7 @@ import { Compass, ArrowLeft } from 'lucide-react';
 export default function NotFound() {
   return (
     <div className="min-h-screen bg-[#09090B] text-white flex flex-col items-center justify-center p-6 text-center">
-      <div className="glass-card p-10 rounded-3xl max-w-md w-full border border-[#27272A] relative overflow-hidden shadow-2xl">
+      <div className="glass-card p-10 rounded-3xl max-w-[448px] w-full border border-[#27272A] relative overflow-hidden shadow-2xl">
         <div className="w-16 h-16 rounded-2xl bg-[#6C63FF]/20 text-[#6C63FF] border border-[#6C63FF]/30 flex items-center justify-center mx-auto mb-6">
           <Compass className="w-8 h-8 animate-spin" style={{ animationDuration: '10s' }} />
         </div>

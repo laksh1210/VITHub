@@ -31,7 +31,7 @@ export default function NavigationOverlay({ targetBuilding, onClearNavigation }:
       />
 
       {/* Floating Navigation Guidance Card */}
-      <div className="absolute bottom-6 left-4 right-4 sm:left-auto sm:right-6 z-[400] max-w-sm glass-panel p-4 rounded-2xl border border-[#6C63FF]/40 shadow-2xl animate-in slide-in-from-bottom-5">
+      <div className="absolute bottom-6 left-4 right-4 sm:left-auto sm:right-6 z-[400] max-w-[384px] glass-panel p-4 rounded-2xl border border-[#6C63FF]/40 shadow-2xl animate-in slide-in-from-bottom-5">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2 text-xs font-bold text-white">
             <Navigation className="w-4 h-4 text-[#6C63FF]" />

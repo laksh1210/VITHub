@@ -21,7 +21,7 @@ export default function WidgetError({
       </div>
       <div>
         <h4 className="text-sm font-semibold text-foreground">{title}</h4>
-        <p className="text-xs text-muted-foreground mt-1 max-w-sm">{message}</p>
+        <p className="text-xs text-muted-foreground mt-1 max-w-[384px]">{message}</p>
       </div>
       {onRetry && (
         <button

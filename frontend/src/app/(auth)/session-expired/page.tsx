@@ -9,7 +9,7 @@ export default function SessionExpiredPage() {
   return (
     <PublicLayout>
       <div className="flex min-h-screen items-center justify-center p-4">
-        <Card className="max-w-md w-full text-center">
+        <Card className="max-w-[448px] w-full text-center">
           <CardHeader>
             <div className="mx-auto bg-amber-500/10 p-3 rounded-full w-fit mb-4">
               <Clock className="w-8 h-8 text-amber-500" />
