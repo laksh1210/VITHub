@@ -261,7 +261,7 @@ Built on **Spring WebSocket (STOMP protocol)** for sub-second updates without pa
 
 | Role | Name | Registration No. |
 |---|---|---|
-| Team Lead | Karan Singh | 24BAI10687 |
+| Team Lead | Karan Singh | 24BAI10685 |
 | Member | Lakshay Falor | 24BAI10117 |
 | Member | Pragyan Shrivastava | 24BAI10326 |
 | Member | Sunav Sunil Mattoo | 24BAI10903 |
