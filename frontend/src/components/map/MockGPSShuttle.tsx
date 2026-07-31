@@ -1,22 +1,89 @@
 'use client';
 
-import React from 'react';
-import { Marker, Popup } from 'react-leaflet';
+import React, { useState, useEffect } from 'react';
+import { Marker, Popup, Polyline } from 'react-leaflet';
 import { POI_ICONS } from '@/lib/leaflet-config';
 import { ShuttleLocation } from '@/types/map';
 import { Bus, Navigation, Gauge } from 'lucide-react';
+import { CAMPUS_SHUTTLE_ROUTE } from '@/data/campusRoutes';
 
 interface MockGPSShuttleProps {
   showShuttles: boolean;
   shuttles: ShuttleLocation[];
 }
 
+interface AnimatedShuttle extends ShuttleLocation {
+  routeIndex: number;
+}
+
 export default function MockGPSShuttle({ showShuttles, shuttles }: MockGPSShuttleProps) {
+  const [animatedShuttles, setAnimatedShuttles] = useState<AnimatedShuttle[]>([]);
+
+  // Initialize shuttles onto the route
+  useEffect(() => {
+    if (!showShuttles || shuttles.length === 0) return;
+    
+    setAnimatedShuttles(current => {
+      // If we already initialized them, don't reset (prevents jumping if API polls)
+      if (current.length === shuttles.length) return current;
+
+      return shuttles.map((shuttle, i) => {
+        // Space them out evenly along the route
+        const startIndex = Math.floor((i * CAMPUS_SHUTTLE_ROUTE.length) / shuttles.length);
+        const [lat, lng] = CAMPUS_SHUTTLE_ROUTE[startIndex];
+        return {
+          ...shuttle,
+          latitude: lat,
+          longitude: lng,
+          routeIndex: startIndex,
+        };
+      });
+    });
+  }, [showShuttles, shuttles]);
+
+  // Animate movement along the route
+  useEffect(() => {
+    if (!showShuttles) return;
+
+    const intervalId = setInterval(() => {
+      setAnimatedShuttles((current) => 
+        current.map(s => {
+          const nextIndex = (s.routeIndex + 1) % CAMPUS_SHUTTLE_ROUTE.length;
+          const [lat, lng] = CAMPUS_SHUTTLE_ROUTE[nextIndex];
+          
+          // Randomize speed slightly for a realistic live feel
+          const newSpeed = Math.max(15, Math.min(45, s.speed + (Math.random() * 4 - 2)));
+          
+          return {
+            ...s,
+            latitude: lat,
+            longitude: lng,
+            routeIndex: nextIndex,
+            speed: Math.round(newSpeed),
+          };
+        })
+      );
+    }, 1000); // Move every 1 second
+
+    return () => clearInterval(intervalId);
+  }, [showShuttles]);
+
   if (!showShuttles) return null;
+
+  const displayShuttles = animatedShuttles.length > 0 ? animatedShuttles : shuttles;
 
   return (
     <>
-      {shuttles.map((shuttle) => {
+      {/* Draw the shuttle route on the map */}
+      <Polyline 
+        positions={CAMPUS_SHUTTLE_ROUTE} 
+        color="#34d399" 
+        weight={3} 
+        opacity={0.5} 
+        dashArray="10, 10" 
+      />
+
+      {displayShuttles.map((shuttle) => {
         return (
           <Marker key={shuttle.id} position={[shuttle.latitude, shuttle.longitude]} icon={POI_ICONS.SHUTTLE}>
             <Popup>
