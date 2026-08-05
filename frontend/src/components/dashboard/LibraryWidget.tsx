@@ -5,7 +5,7 @@ import { useLibraryAnalytics } from '@/hooks/api/use-dashboard';
 import WidgetSkeleton from './WidgetSkeleton';
 import WidgetError from './WidgetError';
 import WidgetEmpty from './WidgetEmpty';
-import { BookOpen, CheckCircle2, Bookmark, Wrench, UserCheck } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function LibraryWidget() {
@@ -34,13 +34,6 @@ export default function LibraryWidget() {
       {analytics.libraries.map((library) => {
         const occupancyRate = library.occupancyRate ?? 0;
         const availableRate = 100 - occupancyRate;
-
-        const seatTypes = [
-          { label: 'Available', count: library.availableSeats, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20', icon: CheckCircle2 },
-          { label: 'Occupied', count: library.occupiedSeats, color: 'text-purple-400', bg: 'bg-purple-500/10 border-purple-500/20', icon: UserCheck },
-          { label: 'Reserved', count: library.reservedSeats, color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', icon: Bookmark },
-          { label: 'Maintenance', count: library.outOfServiceSeats, color: 'text-rose-400', bg: 'bg-rose-500/10 border-rose-500/20', icon: Wrench },
-        ];
 
         return (
           <div key={library.id} className="p-4 sm:p-6 rounded-2xl bg-card border border-border space-y-6 shadow-xl flex flex-col justify-between">
